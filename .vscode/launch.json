@@ -5,9 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Flutter - moto ",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "Moto",
+    },
+    {
       "name": "Flutter",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
     }
   ]
 }
