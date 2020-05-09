@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                           left: ScreenUtil().setHeight(300),
                           child: Text(
                             'All you need \nis to stay at home',
-                            style: kHeadingTextStyle.copyWith(
+                            style: headingTextStyle.copyWith(
                               color: Colors.white,
                             ),
                           ),
@@ -160,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 TextSpan(
                                   text: 'Case Update',
-                                  style: kTitleTextstyle,
+                                  style: titleTextstyle,
                                 ),
                               ],
                             ),
@@ -185,13 +185,103 @@ class HomeScreen extends StatelessWidget {
                         style: linkTextStyles,
                       )
                     ],
-                  )
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      vertical: ScreenUtil().setWidth(60),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: ScreenUtil().setHeight(40),
+                      horizontal: ScreenUtil().setWidth(80),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 4),
+                          blurRadius: 30,
+                          color: shadowColor,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        CaseCounter(
+                          number: 1096,
+                          textStyle: infectedTextStyles,
+                          title: 'Infected',
+                          color: infectedColor,
+                        ),
+                        CaseCounter(
+                          number: 87,
+                          textStyle: deathTextStyles,
+                          title: 'Deaths',
+                          color: deathColor,
+                        ),
+                        CaseCounter(
+                          number: 34,
+                          textStyle: recoveredTextStyles,
+                          title: 'Recovered',
+                          color: recovercolor,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class CaseCounter extends StatelessWidget {
+  final int number;
+  final TextStyle textStyle;
+  final Color color;
+  final String title;
+  const CaseCounter({
+    Key key,
+    this.number,
+    this.textStyle,
+    this.title,
+    this.color,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(ScreenUtil().setHeight(12)),
+          width: ScreenUtil().setWidth(60),
+          height: ScreenUtil().setHeight(60),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: color.withOpacity(0.26),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.transparent,
+              border: Border.all(
+                color: color,
+                width: 2,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          child: Text('$number', style: textStyle),
+        ),
+        Container(
+          child: Text('$title', style: subTextStyle),
+        )
+      ],
     );
   }
 }
