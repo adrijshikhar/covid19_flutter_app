@@ -229,6 +229,43 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Spread of Virus",
+                        style: titleTextstyle,
+                      ),
+                      Text(
+                        'See Details',
+                        style: linkTextStyles,
+                      )
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      vertical: ScreenUtil().setWidth(60),
+                    ),
+                    padding: EdgeInsets.all(
+                      ScreenUtil().setWidth(40),
+                    ),
+                    height: ScreenUtil().setHeight(356),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 10),
+                            blurRadius: 30,
+                            color: shadowColor),
+                      ],
+                    ),
+                    child: Image.asset(
+                      'assets/images/map.png',
+                      fit: BoxFit.contain,
+                    ),
+                  )
                 ],
               ),
             ),
