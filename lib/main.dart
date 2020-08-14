@@ -1,6 +1,7 @@
 import 'package:covid19_flutter_app/styles/styles.dart';
 import 'package:covid19_flutter_app/utils/constant.dart';
 import 'package:covid19_flutter_app/utils/customClipper.dart';
+import 'package:covid19_flutter_app/widgets/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -35,67 +36,10 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            ClipPath(
-              clipper: HomeImageClipper(),
-              child: Container(
-                padding: EdgeInsets.only(
-                  left: ScreenUtil().setHeight(100),
-                  top: ScreenUtil().setHeight(100),
-                  right: ScreenUtil().setHeight(60),
-                ),
-                height: ScreenUtil().setHeight(720),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Color(0xff3383cd),
-                      Color(0xff11249f),
-                    ],
-                  ),
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/virus.png'),
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: SvgPicture.asset('assets/icons/menu.svg'),
-                    ),
-                    SizedBox(
-                      height: ScreenUtil().setHeight(40),
-                    ),
-                    Expanded(
-                        child: Stack(
-                      fit: StackFit.expand,
-                      children: <Widget>[
-                        Positioned(
-                          top: ScreenUtil().setHeight(20),
-                          left: ScreenUtil().setHeight(20),
-                          child: SvgPicture.asset(
-                            'assets/icons/Drcorona.svg',
-                            width: ScreenUtil().setHeight(460),
-                            alignment: Alignment.topCenter,
-                          ),
-                        ),
-                        Positioned(
-                          top: ScreenUtil().setHeight(60),
-                          left: ScreenUtil().setHeight(300),
-                          child: Text(
-                            'All you need \nis to stay at home',
-                            style: headingTextStyle.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ))
-                  ],
-                ),
-              ),
+            Header(
+              image: 'assets/icons/Drcorona.svg',
+              textTop: "All you need",
+              textBottom: "is to stay at home",
             ),
             Container(
               height: ScreenUtil().setHeight(120),
@@ -276,49 +220,81 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class CaseCounter extends StatelessWidget {
-  final int number;
-  final TextStyle textStyle;
-  final Color color;
-  final String title;
-  const CaseCounter({
+class Header extends StatelessWidget {
+  final String image;
+  final String textTop;
+  final String textBottom;
+
+  const Header({
     Key key,
-    this.number,
-    this.textStyle,
-    this.title,
-    this.color,
+    this.image,
+    this.textTop,
+    this.textBottom,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(ScreenUtil().setHeight(12)),
-          width: ScreenUtil().setWidth(60),
-          height: ScreenUtil().setHeight(60),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: color.withOpacity(0.26),
+    return ClipPath(
+      clipper: HomeImageClipper(),
+      child: Container(
+        padding: EdgeInsets.only(
+          left: ScreenUtil().setHeight(100),
+          top: ScreenUtil().setHeight(100),
+          right: ScreenUtil().setHeight(60),
+        ),
+        height: ScreenUtil().setHeight(720),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color(0xff3383cd),
+              Color(0xff11249f),
+            ],
           ),
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.transparent,
-              border: Border.all(
-                color: color,
-                width: 2,
-              ),
+          image: DecorationImage(
+            image: AssetImage('assets/images/virus.png'),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.topRight,
+              child: SvgPicture.asset('assets/icons/menu.svg'),
             ),
-          ),
+            SizedBox(
+              height: ScreenUtil().setHeight(40),
+            ),
+            Expanded(
+                child: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                Positioned(
+                  top: ScreenUtil().setHeight(20),
+                  left: ScreenUtil().setHeight(20),
+                  child: SvgPicture.asset(
+                    image,
+                    width: ScreenUtil().setHeight(460),
+                    alignment: Alignment.topCenter,
+                  ),
+                ),
+                Positioned(
+                  top: ScreenUtil().setHeight(60),
+                  left: ScreenUtil().setHeight(300),
+                  child: Text(
+                    '$textTop \n$textBottom',
+                    style: headingTextStyle.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ))
+          ],
         ),
-        Container(
-          child: Text('$number', style: textStyle),
-        ),
-        Container(
-          child: Text('$title', style: subTextStyle),
-        )
-      ],
+      ),
     );
   }
 }
