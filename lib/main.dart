@@ -2,6 +2,7 @@ import 'package:covid19_flutter_app/styles/styles.dart';
 import 'package:covid19_flutter_app/utils/constant.dart';
 import 'package:covid19_flutter_app/widgets/counter.dart';
 import 'package:covid19_flutter_app/widgets/header.dart';
+import 'package:covid19_flutter_app/widgets/info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: backgroundColor,
           fontFamily: "Poppins",
           textTheme: TextTheme(bodyText2: TextStyle(color: bodyTextColor))),
-      home: HomeScreen(),
+      home: InfoScreen(),
     );
   }
 }
