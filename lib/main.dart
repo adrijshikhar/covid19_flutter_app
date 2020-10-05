@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: backgroundColor,
           fontFamily: "Poppins",
           textTheme: TextTheme(bodyText2: TextStyle(color: bodyTextColor))),
-      home: InfoScreen(),
+      home: HomeScreen(),
     );
   }
 }

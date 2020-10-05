@@ -1,6 +1,6 @@
-
 import 'package:covid19_flutter_app/styles/styles.dart';
 import 'package:covid19_flutter_app/utils/clipper.dart';
+import 'package:covid19_flutter_app/widgets/info_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -48,7 +48,18 @@ class Header extends StatelessWidget {
           children: <Widget>[
             Align(
               alignment: Alignment.topRight,
-              child: SvgPicture.asset('assets/icons/menu.svg'),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return InfoScreen();
+                        },
+                      ),
+                    );
+                  },
+                  child: SvgPicture.asset('assets/icons/menu.svg')),
             ),
             SizedBox(
               height: ScreenUtil().setHeight(40),
