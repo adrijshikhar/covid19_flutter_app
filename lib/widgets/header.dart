@@ -6,18 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
   final String image;
   final String textTop;
   final String textBottom;
+  final double offset;
 
   const Header({
     Key key,
     this.image,
     this.textTop,
     this.textBottom,
+    this.offset,
   }) : super(key: key);
+  @override
+  _HeaderState createState() => _HeaderState();
+}
 
+class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
