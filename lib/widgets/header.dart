@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Header extends StatefulWidget {
+class CovidHeader extends StatefulWidget {
   final String image;
   final String textTop;
   final String textBottom;
   final double offset;
 
-  const Header({
+  const CovidHeader({
     Key key,
     this.image,
     this.textTop,
@@ -20,10 +20,10 @@ class Header extends StatefulWidget {
     this.offset,
   }) : super(key: key);
   @override
-  _HeaderState createState() => _HeaderState();
+  _CovidHeaderState createState() => _CovidHeaderState();
 }
 
-class _HeaderState extends State<Header> {
+class _CovidHeaderState extends State<CovidHeader> {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
@@ -75,19 +75,19 @@ class _HeaderState extends State<Header> {
               fit: StackFit.expand,
               children: <Widget>[
                 Positioned(
-                  top: ScreenUtil().setHeight(20),
+                  top: (widget.offset < 0) ? 0 : widget.offset,
                   left: ScreenUtil().setHeight(20),
                   child: SvgPicture.asset(
-                    image,
+                    widget.image,
                     width: ScreenUtil().setHeight(460),
                     alignment: Alignment.topCenter,
                   ),
                 ),
                 Positioned(
-                  top: ScreenUtil().setHeight(60),
+                  top: 20 - widget.offset / 2,
                   left: ScreenUtil().setHeight(300),
                   child: Text(
-                    '$textTop \n$textBottom',
+                    '${widget.textTop} \n${widget.textBottom}',
                     style: headingTextStyle.copyWith(
                       color: Colors.white,
                     ),

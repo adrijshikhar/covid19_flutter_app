@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Header(
+            CovidHeader(
               image: 'assets/icons/Drcorona.svg',
               textTop: "All you need",
               textBottom: "is to stay at home",
@@ -82,13 +82,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         underline: SizedBox(),
                         icon: SvgPicture.asset("assets/icons/dropdown.svg"),
                         value: "India",
-                        items: ['India', 'Bangladesh', 'United States', 'Japan']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
+                        items: [
+                          'India',
+                          'Bangladesh',
+                          'United States',
+                          'Japan',
+                        ].map<DropdownMenuItem<String>>(
+                          (String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          },
+                        ).toList(),
                         onChanged: (value) {},
                       ),
                     ),
