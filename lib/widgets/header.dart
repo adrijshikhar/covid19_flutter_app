@@ -26,12 +26,15 @@ class CovidHeader extends StatefulWidget {
 class _CovidHeaderState extends State<CovidHeader> {
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = ScreenUtil.statusBarHeight;
+    double pixelRatio = ScreenUtil.pixelRatio;
+    double contentOffset = statusBarHeight * pixelRatio + 20;
     return ClipPath(
       clipper: HomeImageClipper(),
       child: Container(
         padding: EdgeInsets.only(
           left: ScreenUtil().setHeight(100),
-          top: ScreenUtil().setHeight(100),
+          top: ScreenUtil().setHeight(contentOffset),
           right: ScreenUtil().setHeight(60),
         ),
         height: ScreenUtil().setHeight(720),

@@ -1,4 +1,4 @@
-var states = <Map>[
+var stateCodes = <Map>[
   {"key": "AN", "name": "Andaman and Nicobar Islands"},
   {"key": "AP", "name": "Andhra Pradesh"},
   {"key": "AR", "name": "Arunachal Pradesh"},

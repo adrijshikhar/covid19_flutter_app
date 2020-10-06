@@ -5,6 +5,7 @@ import 'package:covid19_flutter_app/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:covid19_flutter_app/constants/state_codes.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final controller = ScrollController();
   double offset = 0;
-
+  String stateKey = "AN";
   @override
   void initState() {
     // TODO: implement initState
@@ -81,21 +82,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         isExpanded: true,
                         underline: SizedBox(),
                         icon: SvgPicture.asset("assets/icons/dropdown.svg"),
-                        value: "India",
-                        items: [
-                          'India',
-                          'Bangladesh',
-                          'United States',
-                          'Japan',
-                        ].map<DropdownMenuItem<String>>(
-                          (String value) {
+                        value: stateKey,
+                        items: stateCodes.map<DropdownMenuItem<String>>(
+                          (Map index) {
                             return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
+                              value: index['key'],
+                              child: Text(index['name']),
                             );
                           },
                         ).toList(),
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          setState(() {
+                            stateKey = value;
+                          });
+                        },
                       ),
                     ),
                   )
