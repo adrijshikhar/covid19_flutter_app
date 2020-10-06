@@ -26,15 +26,16 @@ class CovidHeader extends StatefulWidget {
 class _CovidHeaderState extends State<CovidHeader> {
   @override
   Widget build(BuildContext context) {
+    var cP = Navigator.of(context).canPop();
     double statusBarHeight = ScreenUtil.statusBarHeight;
     double pixelRatio = ScreenUtil.pixelRatio;
-    double contentOffset = statusBarHeight * pixelRatio + 20;
+    double contentOffset = statusBarHeight * pixelRatio;
     return ClipPath(
       clipper: HomeImageClipper(),
       child: Container(
         padding: EdgeInsets.only(
-          left: ScreenUtil().setHeight(100),
           top: ScreenUtil().setHeight(contentOffset),
+          left: ScreenUtil().setHeight(60),
           right: ScreenUtil().setHeight(60),
         ),
         height: ScreenUtil().setHeight(720),
@@ -56,19 +57,8 @@ class _CovidHeaderState extends State<CovidHeader> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Align(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return InfoScreen();
-                        },
-                      ),
-                    );
-                  },
-                  child: SvgPicture.asset('assets/icons/menu.svg')),
+              alignment: cP ? Alignment.topLeft : Alignment.topRight,
+              child: cP ? Back() : Menu(),
             ),
             SizedBox(
               height: ScreenUtil().setHeight(40),
@@ -79,16 +69,16 @@ class _CovidHeaderState extends State<CovidHeader> {
               children: <Widget>[
                 Positioned(
                   top: (widget.offset < 0) ? 0 : widget.offset,
-                  left: ScreenUtil().setHeight(20),
+                  left: ScreenUtil().setHeight(100),
                   child: SvgPicture.asset(
                     widget.image,
                     width: ScreenUtil().setHeight(460),
-                    alignment: Alignment.topCenter,
+                    alignment: Alignment(0.0, 1),
                   ),
                 ),
                 Positioned(
                   top: 20 - widget.offset / 2,
-                  left: ScreenUtil().setHeight(300),
+                  left: ScreenUtil().setHeight(400),
                   child: Text(
                     '${widget.textTop} \n${widget.textBottom}',
                     style: headingTextStyle.copyWith(
@@ -100,6 +90,51 @@ class _CovidHeaderState extends State<CovidHeader> {
             ))
           ],
         ),
+      ),
+    );
+  }
+}
+
+class Back extends StatelessWidget {
+  const Back({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+      icon: SvgPicture.asset(
+        'assets/icons/back.svg',
+        width: 20,
+      ),
+    );
+  }
+}
+
+class Menu extends StatelessWidget {
+  const Menu({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return InfoScreen();
+            },
+          ),
+        );
+      },
+      icon: SvgPicture.asset(
+        'assets/icons/menu.svg',
+        width: 20,
       ),
     );
   }
